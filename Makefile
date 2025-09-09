@@ -1,0 +1,1 @@
+#The options –g and –Wall must be enabled in the Makefile
