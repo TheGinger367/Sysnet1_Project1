@@ -9,19 +9,21 @@ class Param {
         int background; /* either 0 (false) or 1 (true) */
         int argumentCount; /* number of tokens in argument vector */
         char *argumentVector[MAXARGS]; /* array of strings */
-    puplic:
-        void getUserInput();
+    public:
+        void getUserInput(char * userInput);
         void printParams();
 
         char getInputRedirect();
-        void setInputRedirect();
+        void setInputRedirect(char *inputRedirect);
 
         char getOutputRedirect();
-        void setOutputRedirect();
+        void setOutputRedirect(char *outputRedirect);
 
         int getBackground();
-        void setBackground();
+        void setBackground(int background);
 
         int getArgumentCount();
-        void setArgumentCount();
+        void setArgumentCount(int argc);
+
+        void setArgumentVector(char *argumentVectorArg);
 };
