@@ -13,10 +13,10 @@ void Param::printParams(){
     std::cout << std::endl;
 }
 
-char Param::getInputRedirect(){return *inputRedirect;}
+char Param::getInputRedirect(){    return inputRedirect ? *inputRedirect : '\0';}
 void Param::setInputRedirect(char *inputRedirect){this->inputRedirect = inputRedirect;}
 
-char Param::getOutputRedirect(){return *outputRedirect;}
+char Param::getOutputRedirect(){return outputRedirect ? *outputRedirect : '\0';}
 void Param::setOutputRedirect(char *outputRedirect){ this->outputRedirect = outputRedirect;}
 
 int Param::getBackground(){return background;}
@@ -40,57 +40,57 @@ void Param::setArgumentVector(char *argumentVectorArg){
 //and the characters following the redirect character specify the name of the file to which output must be written.
 //The name of the output file ("five") must be stored in outputRedirect.
 
-void Param::getUserInput(char * userInput){
-    argumentCount = 0;
-    inputRedirect = nullptr;
-    outputRedirect = nullptr;
-    background = 0;
+// void Param::getUserInput(char * userInput){
+//     argumentCount = 0;
+//     inputRedirect = nullptr;
+//     outputRedirect = nullptr;
+//     background = 0;
 
-    const char* delim = " \t";
-    char* token = strtok(userInput, delim);
-    while (token != nullptr) {
+//     const char* delim = " \t";
+//     char* token = strtok(userInput, delim);
+//     while (token != nullptr) {
 
-        //check for input
-        if(token[0] == '<') {
-            if(token[1] == '\0') {
-                std::cerr << "Syntax error: missing input filename after '<'\n";
-                return;
-            }
-            else {
-                inputRedirect = token + 1;
-            }
-        }
-        //check output
-        if(token[0] == '>') {
-            if (token[1] == '\0'){
-                std::cerr << "Syntax error: missing output filename after '>'\n";
-                return;
-            }
-            else{
-                outputRedirect = token + 1;
-            }
-        }
-            // Check for backgrounding "&"
-        else if (token[0] == '&' && token[1] == '\0') {
-        // '&' must be last
-            token = strtok(nullptr, delim);
-            if (token != nullptr) {
-                std::cerr << "Syntax error: '&' must appear at the end of the command\n";
-                return;
-            }
-            background = true;
-            break; // no more parsing
-        }
-        else {
-            if (argumentCount >= MAXARGS) {
-                std::cerr << "Error: too many arguments (max " << MAXARGS << ")\n";
-                return;
-            }
-            argumentVector[argumentCount++] = token;
-        }
-        token = strtok(nullptr, delim);
-    }
-}
+//         //check for input
+//         if(token[0] == '<') {
+//             if(token[1] == '\0') {
+//                 std::cerr << "Syntax error: missing input filename after '<'\n";
+//                 return;
+//             }
+//             else {
+//                 inputRedirect = token + 1;
+//             }
+//         }
+//         //check output
+//         if(token[0] == '>') {
+//             if (token[1] == '\0'){
+//                 std::cerr << "Syntax error: missing output filename after '>'\n";
+//                 return;
+//             }
+//             else{
+//                 outputRedirect = token + 1;
+//             }
+//         }
+//             // Check for backgrounding "&"
+//         else if (token[0] == '&' && token[1] == '\0') {
+//         // '&' must be last
+//             token = strtok(nullptr, delim);
+//             if (token != nullptr) {
+//                 std::cerr << "Syntax error: '&' must appear at the end of the command\n";
+//                 return;
+//             }
+//             background = true;
+//             break; // no more parsing
+//         }
+//         else {
+//             if (argumentCount >= MAXARGS) {
+//                 std::cerr << "Error: too many arguments (max " << MAXARGS << ")\n";
+//                 return;
+//             }
+//             argumentVector[argumentCount++] = token;
+//         }
+//         token = strtok(nullptr, delim);
+//     }
+// }
     /* //needs to be fixed
     if (strtok(userInput, " ") != NULL){
         argumentVector[0] = strtok(userInput, " ");

@@ -7,17 +7,17 @@ int main (int argc, char* argv[])
     Param myParameters;
     bool debugMode = false;
     bool exit = false;
-    char* inputLine;
+    char* inputLine = new char[1024];
     if (argc > 1) {
-        if (argv[1] == "-Debug"){
-            debugMode = true;
-        }
+    if (strcmp(argv[1], "-Debug") == 0) {
+        debugMode = true;
     }
+}
     while(exit == false) {
         cout << "myshell> ";
         cin.getline(inputLine, 1024);
-    }
-    if (inputLine == "exit") {
+    
+    if (strcmp(inputLine, "exit") == 0) {
         exit = true;
     }
     else {
@@ -26,5 +26,7 @@ int main (int argc, char* argv[])
             myParameters.printParams();
         }
     }
+    }
+    delete [] inputLine;
     return 0;
 }
