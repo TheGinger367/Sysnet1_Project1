@@ -21,6 +21,8 @@ void Parse::getUserInput(char *userInput, Param& paramObj){
             }
             else {
                 paramObj.setInputRedirect(token + 1);
+                token = strtok(nullptr, delim);
+                continue;
             }
         }
         //check output
@@ -31,6 +33,8 @@ void Parse::getUserInput(char *userInput, Param& paramObj){
             }
             else{
                 paramObj.setOutputRedirect(token + 1);
+                token = strtok(nullptr, delim);
+                continue;
             }
         }
             // Check for backgrounding "&"
