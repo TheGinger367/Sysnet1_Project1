@@ -6,7 +6,7 @@ int main (int argc, char *argv[])
 {
     Parse myParser;
     Param myParameters;
-    bool debugMode = true;
+    bool debugMode = false;
     bool exit = false;
     char* inputLine = new char[1024];
     if (argc > 1) {
