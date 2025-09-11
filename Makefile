@@ -13,4 +13,4 @@ parse.o: parse.cpp parse.hpp
 
 .PHONY : clean
 clean: 
-	rm test $(objects)
+	rm myshell $(objects)

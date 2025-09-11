@@ -2,7 +2,7 @@
 #include "parse.hpp"
 #include <iostream>
 
-void Parse::getUserInput(char * userInput, Param paramObj){
+void Parse::getUserInput(char *userInput, Param& paramObj){
     paramObj.setArgumentCount(0);
     paramObj.setInputRedirect(nullptr);
     paramObj.setOutputRedirect(nullptr);

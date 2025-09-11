@@ -28,9 +28,14 @@ void Param::setArgumentCount(int argc){
 }
 
 void Param::setArgumentVector(char *argumentVectorArg){
+    if (argumentCount < MAXARGS) {
     argumentVector[argumentCount] = new char[strlen(argumentVectorArg) + 1];
     strcpy(argumentVector[argumentCount], argumentVectorArg);
     argumentCount += 1;
+    }
+    else {
+    std::cerr << "Too many arguments!\n";
+}
 }
 //When the line is parsed, the first three tokens are not special, so they must be placed in argumentVector[0],
 //argumentVector[1], and argumentVector[2] accordingly. When the fourth token is extracted, it is

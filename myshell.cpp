@@ -1,11 +1,11 @@
 #include <iostream>
 #include "parse.hpp"
 using namespace std;
-int main (int argc, char* argv[])
+int main (int argc, char *argv[])
 {
     Parse myParser;
     Param myParameters;
-    bool debugMode = false;
+    bool debugMode = true;
     bool exit = false;
     char* inputLine = new char[1024];
     if (argc > 1) {
@@ -17,15 +17,15 @@ int main (int argc, char* argv[])
         cout << "myshell> ";
         cin.getline(inputLine, 1024);
     
-    if (strcmp(inputLine, "exit") == 0) {
-        exit = true;
-    }
-    else {
-        myParser.getUserInput(inputLine, myParameters);
-        if (debugMode == true){
-            myParameters.printParams();
+        if (strcmp(inputLine, "exit") == 0) {
+            exit = true;
         }
-    }
+        else {
+            myParser.getUserInput(inputLine, myParameters);
+            if (debugMode == true){
+                myParameters.printParams();
+            }
+        }
     }
     delete [] inputLine;
     return 0;

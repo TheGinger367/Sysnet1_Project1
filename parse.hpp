@@ -2,5 +2,5 @@
 class Parse 
 {
     public:
-        void getUserInput(char * userInput, Param paramObj);
+        void getUserInput(char * userInput, Param& paramObj);
 };
