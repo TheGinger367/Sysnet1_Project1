@@ -1,3 +1,4 @@
+#include <cstring>
 #include "param.hpp"
 class Parse 
 {
