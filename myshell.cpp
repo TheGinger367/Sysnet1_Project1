@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include "parse.hpp"
-using namespace std;
+
 int main (int argc, char *argv[])
 {
     Parse myParser;
@@ -16,7 +16,7 @@ int main (int argc, char *argv[])
 }
     while(exit == false) {
         cout << "myshell> ";
-        cin.getline(inputLine, 1024);
+        std::cin.getline(inputLine, 1024);
     
         if (strcmp(inputLine, "exit") == 0) {
             exit = true;
@@ -28,13 +28,17 @@ int main (int argc, char *argv[])
                 myParameters.printParams();
             }
             
-            if (argumentVector[0] == "cat"){
+            if (argumentVector[0] == "cat" && inputRedirect != NULL){
                 if (!background){
                     /* displays the source code of the program on the screen */
+                    std::ifstream file(inputRedirect);
+
+                    if (file.is_open())
+                        std::cout << file.rdbuf();
                 }
                 else{
                     if (argumentVector[1] == NULL){
-                        /* displays the source code of the program on the screen as below except the output will be displayed in the background causing the prompt of the shell to be mixed with the output of the file*/
+                        /* displays the source code of the program on the screen as above except the output will be displayed in the background causing the prompt of the shell to be mixed with the output of the file*/
                     }
                     else{
                         /* displays the content of the text file testfile.txt on the screen in the background */
@@ -44,6 +48,7 @@ int main (int argc, char *argv[])
             else if (argumentVector[0] == "ls" && argumentVector[1] == "-l"){
                 if (outputRedirect == NULL){
                     /* shows a listing of files in the current directory */
+                    //opendir, readdir, printf, and closedir?
                 }
                 else{
                     /* writes a listing of files into the text file testfile.txt */
@@ -54,9 +59,11 @@ int main (int argc, char *argv[])
             }
             else if (argumentVector[0] == "grep" && argumentVector[1] == "-i" && argumentVector[2] == "shell"){
                 /* list many lines containing the word shell in the previous file */
+                //What does this mean? what is the previous file?
             }
             else {
                 /* unknown command */
+                std::cout << "The command you have entered is unknown, make sure the command is typed correctly and includes all nessisary arguments." << std::endl;
             }   
         }
     }
