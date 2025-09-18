@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cstring>
+#include <unistd.h>
+#include <sys/wait.h>
 #include "parse.hpp"
 
 int main (int argc, char *argv[])
@@ -27,44 +29,23 @@ int main (int argc, char *argv[])
             if (debugMode == true){
                 myParameters.printParams();
             }
-            
-            if (argumentVector[0] == "cat" && inputRedirect != NULL){
-                if (!background){
-                    /* displays the source code of the program on the screen */
-                    std::ifstream file(inputRedirect);
+            //Insert "NOT CORRECT" potentally
+            pid_t pid = fork();
 
-                    if (file.is_open())
-                        std::cout << file.rdbuf();
+            if (pid == -1) {
+                std::cerr << "Fork failed." << std::endl;
+                exit(EXIT_FAILURE);
+            } 
+            else if (pid == 0) { //Child process
+                if (execvp(args[0], args.data()) == -1) {
+                    std::cerr << "Error executing command: " << command_line << std::endl;
+                    exit(EXIT_FAILURE);
                 }
-                else{
-                    if (argumentVector[1] == NULL){
-                        /* displays the source code of the program on the screen as above except the output will be displayed in the background causing the prompt of the shell to be mixed with the output of the file*/
-                    }
-                    else{
-                        /* displays the content of the text file testfile.txt on the screen in the background */
-                    }
-                }
+            } 
+            else { //Parent process
+                int status;
+                waitpid(pid, &status, 0); //Wait for the child to finish
             }
-            else if (argumentVector[0] == "ls" && argumentVector[1] == "-l"){
-                if (outputRedirect == NULL){
-                    /* shows a listing of files in the current directory */
-                    //opendir, readdir, printf, and closedir?
-                }
-                else{
-                    /* writes a listing of files into the text file testfile.txt */
-                }
-            }
-            else if (argumentVector[0] == "./slow" && background){
-                /* runs the program slow from the current working directory in the background */
-            }
-            else if (argumentVector[0] == "grep" && argumentVector[1] == "-i" && argumentVector[2] == "shell"){
-                /* list many lines containing the word shell in the previous file */
-                //What does this mean? what is the previous file?
-            }
-            else {
-                /* unknown command */
-                std::cout << "The command you have entered is unknown, make sure the command is typed correctly and includes all nessisary arguments." << std::endl;
-            }   
         }
     }
     delete [] inputLine;
@@ -83,3 +64,42 @@ int main (int argc, char *argv[])
 //                            background
 //exit                        terminates the shell; all child processes must be terminated for the shell
 //                            to close avoiding creation of zombie processes
+
+//NOT CORRECT
+            // if (argumentVector[0] == "cat" && inputRedirect != NULL){
+            //     if (!background){
+            //         /* displays the source code of the program on the screen */
+            //         std::ifstream file(inputRedirect);
+
+            //         if (file.is_open())
+            //             std::cout << file.rdbuf();
+            //     }
+            //     else{
+            //         if (argumentVector[1] == NULL){
+            //             /* displays the source code of the program on the screen as above except the output will be displayed in the background causing the prompt of the shell to be mixed with the output of the file*/
+            //         }
+            //         else{
+            //             /* displays the content of the text file testfile.txt on the screen in the background */
+            //         }
+            //     }
+            // }
+            // else if (argumentVector[0] == "ls" && argumentVector[1] == "-l"){
+            //     if (outputRedirect == NULL){
+            //         /* shows a listing of files in the current directory */
+            //         //opendir, readdir, printf, and closedir?
+            //     }
+            //     else{
+            //         /* writes a listing of files into the text file testfile.txt */
+            //     }
+            // }
+            // else if (argumentVector[0] == "./slow" && background){
+            //     /* runs the program slow from the current working directory in the background */
+            // }
+            // else if (argumentVector[0] == "grep" && argumentVector[1] == "-i" && argumentVector[2] == "shell"){
+            //     /* list many lines containing the word shell in the previous file */
+            //     //What does this mean? what is the previous file?
+            // }
+            // else {
+            //     /* unknown command */
+            //     std::cout << "The command you have entered is unknown, make sure the command is typed correctly and includes all nessisary arguments." << std::endl;
+            // }  
