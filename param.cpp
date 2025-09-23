@@ -14,10 +14,10 @@ void Param::printParams(){
     std::cout << std::endl;
 }
 
-char Param::getInputRedirect(){    return inputRedirect ? *inputRedirect : '\0';}
+char* Param::getInputRedirect(){    return inputRedirect ? inputRedirect : nullptr;}
 void Param::setInputRedirect(char *inputRedirect){this->inputRedirect = inputRedirect;}
 
-char Param::getOutputRedirect(){return outputRedirect ? *outputRedirect : '\0';}
+char* Param::getOutputRedirect(){return outputRedirect ? outputRedirect : nullptr;}
 void Param::setOutputRedirect(char *outputRedirect){ this->outputRedirect = outputRedirect;}
 
 int Param::getBackground(){return background;}
@@ -37,6 +37,10 @@ void Param::setArgumentVector(char *argumentVectorArg){
     else {
     std::cerr << "Too many arguments!\n";
 }
+}
+char** Param::getArgumentVector()
+{
+    return argumentVector;
 }
 //When the line is parsed, the first three tokens are not special, so they must be placed in argumentVector[0],
 //argumentVector[1], and argumentVector[2] accordingly. When the fourth token is extracted, it is

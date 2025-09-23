@@ -9,7 +9,7 @@ void Parse::getUserInput(char *userInput, Param& paramObj){
     paramObj.setBackground(0);
     //this is the only thing im confused about. Its taking ' ' and '\t' as delimiters or ' \t' and a delimiter?
     //it might do that but once we get the print statement set up we should be able to see that and fix it
-    const char* delim = " \t";
+    const char* delim = " \t\n";
     char* token = strtok(userInput, delim);
     while (token != nullptr) {
 
@@ -56,5 +56,10 @@ void Parse::getUserInput(char *userInput, Param& paramObj){
             paramObj.setArgumentVector(token);
         }
         token = strtok(nullptr, delim);
+    }
+
+    // Add NULL terminator at the end
+    if (paramObj.getArgumentCount() < MAXARGS) {
+        paramObj.getArgumentVector()[paramObj.getArgumentCount()] = nullptr;
     }
 }

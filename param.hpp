@@ -13,10 +13,10 @@ class Param {
         void getUserInput(char * userInput);
         void printParams();
 
-        char getInputRedirect();
+        char* getInputRedirect();
         void setInputRedirect(char *inputRedirect);
 
-        char getOutputRedirect();
+        char* getOutputRedirect();
         void setOutputRedirect(char *outputRedirect);
 
         int getBackground();
@@ -26,4 +26,5 @@ class Param {
         void setArgumentCount(int argc);
 
         void setArgumentVector(char *argumentVectorArg);
+        char** getArgumentVector();
 };
