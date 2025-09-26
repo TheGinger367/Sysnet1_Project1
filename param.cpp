@@ -42,10 +42,3 @@ char** Param::getArgumentVector()
 {
     return argumentVector;
 }
-//When the line is parsed, the first three tokens are not special, so they must be placed in argumentVector[0],
-//argumentVector[1], and argumentVector[2] accordingly. When the fourth token is extracted, it is
-//identified as an input redirection because of the beginning character (' <'). The characters following the redirection
-//indicator form the name of the file from which input must be redirected. The name of the input file ("four") must be
-//stored in inputRedirect. Similarly, the beginning character ('>') of the fifth token identifies output redirection,
-//and the characters following the redirect character specify the name of the file to which output must be written.
-//The name of the output file ("five") must be stored in outputRedirect.

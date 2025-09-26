@@ -13,10 +13,10 @@ int main (int argc, char *argv[])
     bool exit = false;
     char* inputLine = new char[1024];
     if (argc > 1) {
-    if (strcmp(argv[1], "-Debug") == 0) {
-        debugMode = true;
+        if (strcmp(argv[1], "-Debug") == 0) {
+            debugMode = true;
+        }
     }
-}
     while(exit == false) {
         cout << "$$$ ";
         cin.getline(inputLine, 1024);
@@ -42,21 +42,21 @@ int main (int argc, char *argv[])
             }
             else if (pid == 0) {
                 //child process running
-                if (myParameters.getInputRedirect() != '\0'){
+                if (myParameters.getInputRedirect() != nullptr){
                     if (freopen(myParameters.getInputRedirect(), "r", stdin) == nullptr) {
                         cerr << "Error: cannot open input file: " << myParameters.getInputRedirect() << endl;
                         std::exit(1);
                     }
                 }
-                if (myParameters.getOutputRedirect() != '\0'){
+                if (myParameters.getOutputRedirect() != nullptr){
                     if (freopen(myParameters.getOutputRedirect(), "w", stdout) == nullptr){
                         cerr << "Error: cannot open output file: " << myParameters.getOutputRedirect() << endl;
                         std::exit(1);
                     }
                 }
                 execvp(myParameters.getArgumentVector()[0], myParameters.getArgumentVector());
-                 cerr << "Execvp failed for command: " << myParameters.getArgumentVector()[0] << endl;
-                 std::exit(1); // Exit child process if execvp fails
+                cerr << "Execvp failed for command: " << myParameters.getArgumentVector()[0] << endl;
+                std::exit(1); // Exit child process if execvp fails
             }
             else {
         // Parent process

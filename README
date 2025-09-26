@@ -14,6 +14,3 @@
 
 
 //6. Return back to step 1.
-
-getline(3) //input characters and strings
-strtok(3) //extract tokens from strings
