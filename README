@@ -1,16 +1,11 @@
-//1. Display a prompt on stdout.
+//The program allow for the creation of a Shell.
+//The user's input is broken into arguments that will be used to exicute commands.
+//These arguments can include input and output redirects.
+//The user may also input the command to run in the background or foreground.
 
-
-//2. Accept a command as a string from the user (input string will terminate with a newline character). The program must terminate when the command exit is entered.
-
-
-//3. Parse the input string into tokens, which are single words delimited by one or more spaces, tabs, or newline characters.
-
-
-//4. Store the tokens in the fields of class Param.
-
-
-//5. Print the contents of the fields using printParams() function, which is provided and explained below, but only when the shell is started with the debug option –Debug on the command line. Otherwise, the contents of the string will not be printed.
-
-
-//6. Return back to step 1.
+//A fork of the parent prossess is created to run the command.
+//The parent process will wait for the child process to finish if it is a foreground process.
+//If the command is a background process, the parent will not wait for the child to finish.
+//When the user inputs "exit", the shell will terminate.
+//If there are any background processes running, 
+//the shell will wait for them to finish before terminating to prevent zombie process.
